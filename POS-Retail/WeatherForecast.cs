@@ -1,4 +1,4 @@
-namespace POS_Retail
+namespace SchoolManagementSystem
 {
     public class WeatherForecast
     {

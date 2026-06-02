@@ -1,4 +1,5 @@
-﻿using DAL.Models;
+﻿
+using DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using System;
@@ -11,103 +12,60 @@ namespace UnitofWork
 {
     public class Unitofwork : IUnitofWork
     {
-        private readonly PosRetailContext _context;
-        private ICustomerRepository<Customer> _customerRepository;
-        private IinventoryRepository<Inventory> _inventoryRepository;
-        private IProductRepository<Product> _productRepository;
-        private ICategoryRepository<Category> _categoryRepository;
-        private IPurchaseOrderRepository<PurchaseOrder> _purchaseOrderRepository;
-        private IPurchaseOrderDetailRepository<PurchaseOrderDetail> _purchaseOrderDetailRepository;
-        private ISalesOrderRepository<SalesOrder> _salesOrderRepository;
-        private ISalesOrderDetailRepository<SalesOrderDetail> _salesOrderDetailRepository;
-        private ISupplierRepository<Supplier> _supplierRepository;
-
-        private IWareHouseRepository<WareHouse> _wareHouseRepository;
-
-        public Unitofwork(PosRetailContext context)
+        private readonly SchoolManagementContext _context;
+        private IExamRepository<Exam> _examRepository;
+        private IFeeRepository<Fee> _feeRepository;
+        private IStudentRepository<Student> _studentRepository;
+        private IAttandanceRepository<Attandance> _attandanceRepository;
+        private ITeacherRepository<Teacher> _teacherRepository;
+        
+        public Unitofwork(SchoolManagementContext context)
         {
             _context = context;
         }
 
-        public ICustomerRepository<Customer> CustomerRepository
+        public IExamRepository<Exam> ExamRepository
         {
             get
             {
-                return _customerRepository ??= new CustomerRepository(_context);
+                return _examRepository ??= new ExamRepository(_context);
             }
         }
 
 
-        public IinventoryRepository<Inventory> InventoryRepository
+        public IFeeRepository<Fee> FeeRepository
         {
             get
             {
-                return _inventoryRepository ??= new InventoryRepository(_context);
+                return _feeRepository ??= new FeeRepository(_context);
             }
         }
 
-        public IProductRepository<Product> ProductRepository
+        public IStudentRepository<Student> StudentRepository
         {
             get
             {
-                return _productRepository ??= new ProductRepository(_context); 
+                return _studentRepository ??= new StudentRepository(_context); 
             }
         }
 
-        public ICategoryRepository<Category> CategoryRepository
+        public IAttandanceRepository<Attandance> AttandanceRepository
         {
             get
             {
-                return _categoryRepository ??= new CategoryRepository(_context);
+                return _attandanceRepository ??= new AttandanceRepository(_context);
             }
         }
 
-        public IPurchaseOrderRepository<PurchaseOrder> PurchaseOrderRepository
+        public ITeacherRepository<Teacher> TeacherRepository
         {
             get
             {
-                return _purchaseOrderRepository ??= new PurchaseOrderRepository(_context);
+                return _teacherRepository ??= new TeacherRepository(_context);
             }
         }
 
-        public IPurchaseOrderDetailRepository<PurchaseOrderDetail> PurchaseOrderDetailRepository
-        {
-            get
-            {
-                return _purchaseOrderDetailRepository ??= new PurchaseOrderDetailRepository(_context);
-            }
-        }
-
-        public ISalesOrderRepository<SalesOrder> SalesOrderRepository
-        {
-            get
-            {
-                return _salesOrderRepository ??= new SalesOrderRepository(_context);
-            }
-        }
-
-        public ISalesOrderDetailRepository<SalesOrderDetail> SalesOrderDetailRepository
-        {
-            get
-            {
-                return _salesOrderDetailRepository ??= new SalesOrderDetailRepository(_context);
-            }
-        }
-        public ISupplierRepository<Supplier> SupplierRepository
-        {
-            get
-            {
-                return _supplierRepository ??= new SupplierRepository(_context);
-            }
-        }
-        public IWareHouseRepository<WareHouse> WareHouseRepository
-        {
-            get
-            {
-                return _wareHouseRepository ??= new WareHouseRepository(_context);
-            }
-        }
-
+        
         public void SaveChanges()
         {
             _context.SaveChanges();

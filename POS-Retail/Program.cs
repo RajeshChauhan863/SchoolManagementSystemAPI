@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 
-using POS_Retail;
+using SchoolManagementSystem;
 
 var builder = WebApplication.CreateBuilder(args);
 
